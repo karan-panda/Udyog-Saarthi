@@ -1,11 +1,13 @@
-# Udyog Saarthi (SIH 2023) 
+# Udyog Saarthi (SIH 2023) <img src="https://github.com/karan-panda/Udyog-Saarthi/assets/108183567/064e7525-66d6-4956-aeaa-10ad5112c2a3" alt="Logo" width="25" height="25" style="border-radius: 15%" />
 ## हर दिव्यांग का सारथी
 
 ## Introduction
 Udyog Saarthi Platform is a progressive web app aimed at empowering persons with disabilities (PwDs) by providing them with training, information, and tools to secure employment and lead dignified lives. 
 
-## Objectives
+## Architecture of our Project
+![app-architecture](https://github.com/karan-panda/Udyog-Saarthi/assets/108183567/10b64d23-0865-41fc-b0e6-f6e91691ec87)
 
+## Objectives
 The primary objectives of our Platform are as follows:
 
 1. **Create Personalized Learning Profiles for PwDs:** The platform will allow PwDs to create personalized learning profiles, helping them identify their strengths, weaknesses, and learning preferences.

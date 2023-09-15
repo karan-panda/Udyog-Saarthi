@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Udyog Saarthi Registration</title>
+  <link rel="stylesheet" href="RegistrationForm.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+
+<body class="bgimg">
+  <header>
+    <h1 style="color: rgb(229, 146, 12); text-align: center; font-family: 'Courier New', Courier, monospace; font-weight: 800; text-shadow: 1px 1px 1px black;">Udyog Saarthi App</h1>
+    <h2 style="color: rgb(228, 92, 92); text-align: center; font-family: 'Courier New', Courier, monospace; font-weight: 800; text-shadow: 1px 1px 1px black;">&nbsp; &nbsp; हर दिव्यांग का सारथी <img src="images/madhav-logo.png" alt="MADHAV" width="100px" height="100px" ></h2> 
+  </header>
+
+<div class="container">
+    <!-- Registration Form -->
+    <form id="registrationForm" class="form-group">
+      <div id="form" style="border-radius: 2%;">
+        <h3 class="text-white" style="font-weight: 800;">Registration form</h3>
+        <div id="input">
+          <input type="text" id="first_name" placeholder="First Name">
+          <input type="text" id="last_name" placeholder="Last Name">
+          <input type="text" id="email" placeholder="Email-id">
+        </div>
+        <div id="input2">
+          <input type="text" id="phone" placeholder="Contact">
+          <input type="text" id="age" placeholder="Age">
+        </div>
+        <br>
+        <div id="input3">
+          <span id="input-group" style="color: azure; font-weight: 700;">Gender</span>
+          <input type="radio" id="male" name="gender" value="Male">
+          <label class="text-white" for="input-group">Male</label>
+          <input type="radio" id="female" name="gender" value="Female">
+          <label class="text-white" for="input-group">Female</label>
+          <input type="radio" id="other" name="gender" value="Other">
+          <label class="text-white" for="input-group">Other</label>
+        </div>
+        <br>
+        <div class="dropdown">
+            <div>
+                <label style="color: azure; font-weight: 700;">Category of Disability : </label>
+                <select class="form-select" id="disabilityCategory" >
+                    <option selected>select</option>
+                    <option value="A" id="A">A</option>
+                    <option value="B" id="B">B</option>
+                    <option value="C" id="C">C</option>
+                    <option value="D" id="D">D</option>
+                    <option value="E" id="E">E</option>
+                </select>
+            </div>
+        </div>
+        <br>
+        <div id="input">
+          <input type="password" id="password" placeholder="Password">
+          <input type="password" id="confirm_password" placeholder="Confirm Password">
+        </div>
+        <br>
+        <label style="color: azure; font-weight: 700;">Proof Of Disability : </label>
+        <br>
+        <input class="form-control" type="file" id="DefaultFile">
+        <br>
+        <button type="button" class="btn btn-success" style="font-weight: 800;"><a href="Guardianform.html" style="text-decoration: none;">Register</a></button>
+        <button type="reset" class="btn btn-danger" style="font-weight: 800;">Clear</button>
+        <button type="button" class="btn btn-info" style="font-weight: 800;"><a href="LoginForm.html" style="text-decoration: none;">Switch
+            to Login</a></button>
+      </div>
+    </form>
+</div>
+<script>
+    var isEnteringPassword = false;
+    var isEnteringConfirmPassword = false;
+    var isEnteringCategory=false;
+    var isEnteringGender=false;
+    var isListening = false;
+    var isEnteringFirstName = false;
+    var isEnteringLastName = false;
+    var isEnteringEmail = false;
+    var isEnteringContact = false;
+    var isEnteringAge = false;
+    var firstName = "";
+    var lastName = "";
+    var email="";
+    var contact="";
+    var age="";
+    var category = document.getElementById('disabilityCategory');
+    var password="";
+    var confirmPassword="";
+
+    // Listen for keyboard key presses
+    document.addEventListener("keydown", function (event) {
+      if (event.key === " ") {
+        greet();
+      }
+      if (event.key === "1") {
+        enterFirstName();
+        
+      } else if (event.key === "2") {
+          enterLastName();
+      }
+      else if (event.key === "3") {
+        enterEmail();
+      }
+      else if (event.key === "4") {
+        enterContact();
+      }
+      else if(event.key === "5")
+      {
+        enterAge();
+      }
+      else if(event.key === "6")
+      {
+        enterGender();
+      }
+      else if(event.key === "7")
+      {
+        enterCategory();
+      }
+      else if (event.key === "8") {
+        enterPassword();
+      }
+      else if (event.key === "9") {
+        enterConfirmPassword();
+      }
+      if (event.key === "1" || event.key === "2" || event.key === "3" || event.key==="4" || event.key==="5" || event.key==="6" || event.key==="7" || event.key==="8"|| event.key==="9") {
+        startListening(); // Start listening when 1 or 2 is pressed
+      }
+      if (event.key === "Enter") {
+        submitForm();
+      }
+    });
+
+    var recognition = new webkitSpeechRecognition();
+    recognition.lang = "en-GB";
+    recognition.continuous = true;
+
+    recognition.onstart = function () {
+      isListening = true;
+    }
+
+    recognition.onend = function () {
+      isListening = false;
+    }
+
+    recognition.onresult = function (event) {
+      if (isListening) {
+        var transcript = event.results[event.results.length - 1][0].transcript;
+        document.getElementById("first_name").value = firstName;
+        document.getElementById("last_name").value = lastName;
+        document.getElementById("email").value = email;
+        document.getElementById("phone").value = contact;
+        document.getElementById("age").value = age;
+        document.getElementById("password").value = password;
+        document.getElementById("confirm_password").value = confirmPassword;
+        processSpeech(transcript);
+      }
+    }
+
+    function startListening() {
+      recognition.start();
+    }
+
+
+    function enterConfirmPassword() {
+      if (!isEnteringConfirmPassword) {
+        isEnteringConfirmPassword=true;
+        isEnteringPassword=false;
+        isEnteringCategory=false;
+        isEnteringGender=false;
+        isEnteringAge=false;
+        isEnteringContact=false;
+        isEnteringEmail = false;
+        isEnteringFirstName = false;
+        isEnteringLastName = false;
+        speak("Please Confirm your Password.");
+      }
+    }
+
+    function enterPassword() {
+      if (!isEnteringPassword) {
+        isEnteringConfirmPassword=false;
+        isEnteringPassword=true;
+        isEnteringCategory=false;
+        isEnteringGender=false;
+        isEnteringAge=false;
+        isEnteringContact=false;
+        isEnteringEmail = false;
+        isEnteringFirstName = false;
+        isEnteringLastName = false;
+        speak("Please say your Password.");
+      }
+    }
+    
+
+    function enterCategory() {
+      if (!isEnteringCategory) {
+        isEnteringConfirmPassword=false;
+        isEnteringPassword=false;
+        isEnteringCategory=true;
+        isEnteringGender=false;
+        isEnteringAge=false;
+        isEnteringContact=false;
+        isEnteringEmail = false;
+        isEnteringFirstName = false;
+        isEnteringLastName = false;
+        speak("Please select your Category of Disability.");
+      }
+    }
+
+    function enterGender() {
+      if (!isEnteringGender) {
+        isEnteringConfirmPassword=false;
+        isEnteringPassword=false;
+        isEnteringCategory=false;
+        isEnteringGender=true;
+        isEnteringAge=false;
+        isEnteringContact=false;
+        isEnteringEmail = false;
+        isEnteringFirstName = false;
+        isEnteringLastName = false;
+        speak("Please say your Gender.");
+      }
+    }
+
+    function enterAge() {
+      if (!isEnteringAge) {
+        isEnteringConfirmPassword=false;
+        isEnteringPassword=false;
+        isEnteringCategory=false;
+        isEnteringGender=false;
+        isEnteringAge=true;
+        isEnteringContact=false;
+        isEnteringEmail = false;
+        isEnteringFirstName = false;
+        isEnteringLastName = false;
+        speak("Please say your Age.");
+      }
+    }
+
+    function enterContact() {
+      if (!isEnteringContact) {
+        isEnteringConfirmPassword=false;
+        isEnteringPassword=false;
+        isEnteringCategory=false;
+        isEnteringGender=false;
+        isEnteringAge=false;
+        isEnteringContact=true;
+        isEnteringEmail = false;
+        isEnteringFirstName = false;
+        isEnteringLastName = false;
+        speak("Please say your Contact Number.");
+      }
+    }
+
+    function enterEmail() {
+      if (!isEnteringEmail) {
+        isEnteringConfirmPassword=false;
+        isEnteringPassword=false;
+        isEnteringCategory=false;
+        isEnteringGender=false;
+        isEnteringAge=false;
+        isEnteringContact=false;
+        isEnteringEmail = true;
+        isEnteringFirstName = false;
+        isEnteringLastName = false;
+        speak("Please say your Email.");
+      }
+    }
+
+    function enterFirstName() {
+      if (!isEnteringFirstName) {
+        isEnteringConfirmPassword=false;
+        isEnteringPassword=false;
+        isEnteringCategory=false;
+        isEnteringGender=false;
+        isEnteringAge=false;
+        isEnteringContact=false;
+        isEnteringEmail = false;
+        isEnteringFirstName = true;
+        isEnteringLastName = false;
+        speak("Please say your FirstName.");
+      }
+    }
+
+    function enterLastName() {
+      if (!isEnteringLastName) {
+        isEnteringConfirmPassword=false;
+        isEnteringPassword=false;
+        isEnteringCategory=false;
+        isEnteringGender=false;
+        isEnteringAge=false;
+        isEnteringContact=false;
+        isEnteringEmail = false;
+        isEnteringFirstName = false;
+        isEnteringLastName = true;
+        speak("Please say your LastName.");
+      }
+    }
+
+    function greet() {
+      if (!isEnteringFirstName && !isEnteringLastName) {
+        speak("Hello! I am your assistant, Madhav. Press 1 for entering your first name");
+      }
+    }
+
+    function processSpeech(transcript) {
+      if (isEnteringFirstName) {
+        firstName = transcript;
+        document.getElementById("first_name").value = firstName;
+        speak("FirstName set to " + firstName +"Now press 2 for last name.");
+      } else if (isEnteringLastName) {
+        lastName = transcript;
+        document.getElementById("last_name").value = lastName;
+        speak("lastName set to " + lastName +"Now press 3 for email id.");
+      } 
+      else if (isEnteringEmail) {
+        email = transcript;
+        document.getElementById("email").value = email;
+        speak("username set to " + email +"Now press 4 for contact.");
+      }
+      else if (isEnteringAge) {
+        age = transcript;
+        document.getElementById("age").value = age;
+        speak("Age set to " + age +"Now press 6 for gender.");
+      }
+      else if (isEnteringContact) {
+        contact = transcript;
+        document.getElementById("phone").value = contact;
+        speak("Contact Number set to " + contact +"Now press 5 for age");
+      }
+      else if (isEnteringGender) {
+    transcript = transcript.toLowerCase();
+
+    if (transcript.includes("male")) {
+      // Select the Male radio button
+      document.getElementById("male").checked = true;
+      speak("Gender set to Male. Now press 7 for category");
+    } else if (transcript.includes("female")) {
+      // Select the Female radio button
+      document.getElementById("female").checked = true;
+      speak("Gender set to Female. Now press 7 for category");
+    } else if (transcript.includes("other")) {
+      // Select the Other radio button
+      document.getElementById("other").checked = true;
+      speak("Gender set to Other. Now press 7 for category");
+    } else {
+      document.getElementById("male").checked = true;
+      speak("Gender set to Male. Now press 7 for category");
+    }
+  }
+      
+      else if (isEnteringCategory) {
+    transcript = transcript.toLowerCase();
+
+    var selectedOption;
+
+    if (transcript === "category a") {
+      selectedOption = document.getElementById("A");
+    } else if (transcript === "category b") {
+      selectedOption = document.getElementById("B");
+    } else if (transcript === "category c") {
+      selectedOption = document.getElementById("C");
+    } else if (transcript === "category d") {
+      selectedOption = document.getElementById("D");
+    }
+    else if (transcript === "category e") {
+      selectedOption = document.getElementById("E");
+    }
+
+    if (selectedOption) {
+      selectedOption.selected = true;
+      speak('Category of Disability set to ' + selectedOption.textContent +"Press 8 to enter password.");
+    } else {
+      speak("Sorry, I couldn't understand the category. Please try again.");
+    }
+  }
+  
+  
+      else if (isEnteringPassword) {
+        password = transcript;
+        document.getElementById("password").value = password;
+        speak("Password set to " + password +"Press 9 to confirm password.");
+      }
+      else if (isEnteringConfirmPassword) {
+        confirmPassword = transcript;
+        document.getElementById("confirm_password").value = confirmPassword;
+        speak("Password confirmed. Click enter to submit.");
+      }
+      else if (transcript.toLowerCase() === "submit") {
+        submitForm();
+      }
+    }
+
+    function submitForm() {
+      // Redirect to "google.com"
+      window.location.href = "Guardianform.html";
+    }
+
+    function speak(text) {
+      var synth = window.speechSynthesis;
+      var utterance = new SpeechSynthesisUtterance(text);
+      synth.speak(utterance);
+    }
+  </script>
+</body>
+</html>

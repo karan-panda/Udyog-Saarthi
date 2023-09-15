@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE-edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Udyog Saarthi Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="LoginForm.css">
+</head>
+
+<body>
+  <div class="box">
+    <form>
+      <span class="text-center">
+        <header>
+          <h1 style="color: rgb(209, 127, 39); text-align: center; font-family: 'Courier New', Courier, monospace; font-weight: 800; text-shadow: 1px 1px 1px black;">Udyog Saarthi App</h1>
+          <h2 style="color: rgb(255, 255, 255); text-align: center; font-family: 'Courier New', Courier, monospace; font-weight: 800; text-shadow: 1px 1px 1px black;">&nbsp; &nbsp; हर दिव्यांग का सारथी <img src="images/madhav-logo.png" alt="MADHAV" width="100px" height="100px" ></h2> 
+        </header>
+      </span>
+      <div class="input-container">
+        <input type="text" id="email" />
+        <br>
+        <label>Username</label>
+      </div>
+      <div class="input-container">
+        <input type="password" id="password" />
+        <br><label>Password</label>
+      </div>
+        <button type="button" class="btn btn-success" style="font-weight: 800;" ><a href="homepage.html"> Register </a></button>
+        <button type="reset" class="btn btn-danger" style="font-weight: 800;">Clear</button>
+        <button type="button" class="btn btn-info" style="font-weight: 800;"><a href="RegistrationForm.html">Switch
+            to Registration</a></button>
+    </form>
+  </div>
+  <script>
+    var isListening = false;
+    var isEnteringEmail = false;
+    var isEnteringPassword = false;
+    var email = "";
+    var password = "";
+
+    // Listen for keyboard key presses
+    document.addEventListener("keydown", function (event) {
+      if (event.key === " ") {
+        greet();
+      }
+      if (event.key === "2") {
+        enterPassword();
+      } else if (event.key === "1") {
+        enterEmail();
+      }
+      if (event.key === "1" || event.key === "2") {
+        startListening(); // Start listening when 1 or 2 is pressed
+      }
+      if (event.key === "Enter") {
+        submitForm();
+      }
+    });
+
+    var recognition = new webkitSpeechRecognition();
+    recognition.lang = "en-GB";
+    recognition.continuous = true;
+
+    recognition.onstart = function () {
+      isListening = true;
+    }
+
+    recognition.onend = function () {
+      isListening = false;
+    }
+
+    recognition.onresult = function (event) {
+      if (isListening) {
+        var transcript = event.results[event.results.length - 1][0].transcript;
+        document.getElementById("email").value = email;
+        document.getElementById("password").value = password;
+        processSpeech(transcript);
+      }
+    }
+
+    function startListening() {
+      recognition.start();
+    }
+
+    function enterEmail() {
+      if (!isEnteringEmail) {
+        isEnteringEmail = true;
+        isEnteringPassword = false;
+        speak("Please say your Username.");
+      }
+    }
+
+    function enterPassword() {
+      if (!isEnteringPassword) {
+        isEnteringEmail = false;
+        isEnteringPassword = true;
+        speak("Please say your password.");
+      }
+    }
+
+    function greet() {
+      if (!isEnteringEmail && !isEnteringPassword) {
+        speak("Congratulations you are successfully registered. Now press 1 for entering your username.");
+      }
+    }
+
+    function processSpeech(transcript) {
+      if (isEnteringEmail) {
+        email = transcript;
+        document.getElementById("email").value = email;
+        speak("Hello" + email +" Press 2 to enter your password.");
+      } else if (isEnteringPassword) {
+        password = transcript;
+        document.getElementById("password").value = password;
+        speak("Password entered. Click enter to login.");
+      } else if (transcript.toLowerCase() === "submit") {
+        submitForm();
+      }
+    }
+
+    function submitForm() {
+      // Redirect to "google.com"
+      window.location.href = "homepage.html";
+    }
+
+    function speak(text) {
+      var synth = window.speechSynthesis;
+      var utterance = new SpeechSynthesisUtterance(text);
+      synth.speak(utterance);
+    }
+  </script>
+</body>
+
+</html>

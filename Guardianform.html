@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Udyog Saarthi Guardian Registration</title>
+  <link rel="stylesheet" href="Guardianform.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+
+<body class="bgimg">
+  <header>
+    <h1 style="color: rgb(228, 92, 92); text-align: center; font-family: 'Courier New', Courier, monospace; font-weight: 800; text-shadow: 1px 1px 1px black;">Udyog Saarthi App</h1>
+    <h2 style="color: rgb(228, 92, 92); text-align: center; font-family: 'Courier New', Courier, monospace; font-weight: 800; text-shadow: 1px 1px 1px black;">&nbsp; &nbsp; हर दिव्यांग का सारथी <img src="images/madhav-logo.png" alt="MADHAV" width="100px" height="100px" ></h2> 
+  </header>
+<div class="container">
+
+    <!-- Registration Form -->
+    <form id="registrationForm" class="form-group">
+      <div id="form" style="border-radius: 2%;">
+        <h3 class="text-white" style="font-weight: 800;">Guardian Registration form</h3>
+        <div id="input">
+          <input type="text" id="first_name" placeholder="First Name">
+          <input type="text" id="last_name" placeholder="Last Name">
+          <input type="text" id="email" placeholder="Email-id">
+        </div>
+        <div id="input2">
+          <input type="text" id="phone" placeholder="Contact">
+          <input type="text" id="occupation" placeholder="Occupation">
+        </div>
+        
+        <br>
+        <button type="button" class="btn btn-success" style="font-weight: 800;"><a href="job-process.html" style="text-decoration: none;">Submit</a></button>
+        <button type="reset" class="btn btn-danger" style="font-weight: 800;">Clear</button>
+        <button type="button" class="btn btn-info" style="font-weight: 800;"><a href="LoginForm.html">Switch
+            to Login</a></button>
+      </div>
+    </form>
+</div>
+<script>
+    var isListening = false;
+    var isEnteringFirstName = false;
+    var isEnteringLastName = false;
+    var isEnteringEmail = false;
+    var isEnteringContact = false;
+    var isEnteringOccupation=false;
+    var firstName = "";
+    var lastName = "";
+    var email="";
+    var contact="";
+    var occupation="";
+
+    // Listen for keyboard key presses
+    document.addEventListener("keydown", function (event) {
+      if (event.key === " ") {
+        greet();
+      }
+      if (event.key === "1") {
+        enterFirstName();
+        
+      } else if (event.key === "2") {
+          enterLastName();
+      }
+      else if (event.key === "3") {
+        enterEmail();
+      }
+      else if (event.key === "4") {
+        enterContact();
+      }
+      else if (event.key === "5") {
+        enterOccupation();
+      }
+      if (event.key === "1" || event.key === "2" || event.key === "3" || event.key==="4" ||event.key==="5") {
+        startListening(); // Start listening when 1 or 2 is pressed
+      }
+      if (event.key === "Enter") {
+        submitForm();
+      }
+    });
+
+    var recognition = new webkitSpeechRecognition();
+    recognition.lang = "en-GB";
+    recognition.continuous = true;
+
+    recognition.onstart = function () {
+      isListening = true;
+    }
+
+    recognition.onend = function () {
+      isListening = false;
+    }
+
+    recognition.onresult = function (event) {
+      if (isListening) {
+        var transcript = event.results[event.results.length - 1][0].transcript;
+        document.getElementById("first_name").value = firstName;
+        document.getElementById("last_name").value = lastName;
+        document.getElementById("email").value = email;
+        document.getElementById("phone").value = contact;
+        document.getElementById("occupation").value = occupation;
+        processSpeech(transcript);
+      }
+    }
+
+    function startListening() {
+      recognition.start();
+    }
+
+
+    function enterOccupation() {
+      if (!isEnteringOccupation) {
+        isEnteringOccupation=true;
+        isEnteringContact=false;
+        isEnteringEmail = false;
+        isEnteringFirstName = false;
+        isEnteringLastName = false;
+        speak("Please say Occupation.");
+      }
+    }
+
+    function enterContact() {
+      if (!isEnteringContact) {
+        isEnteringOccupation=false;
+        isEnteringContact=true;
+        isEnteringEmail = false;
+        isEnteringFirstName = false;
+        isEnteringLastName = false;
+        speak("Please say  Contact Number.");
+      }
+    }
+
+    function enterEmail() {
+      if (!isEnteringEmail) {
+        isEnteringOccupation=false;
+        isEnteringContact=false;
+        isEnteringEmail = true;
+        isEnteringFirstName = false;
+        isEnteringLastName = false;
+        speak("Please say  Email.");
+      }
+    }
+
+    function enterFirstName() {
+      if (!isEnteringFirstName) {
+        isEnteringOccupation=false;
+        isEnteringContact=false;
+        isEnteringEmail = false;
+        isEnteringFirstName = true;
+        isEnteringLastName = false;
+        speak("Please say  FirstName.");
+      }
+    }
+
+    function enterLastName() {
+      if (!isEnteringLastName) {
+        isEnteringOccupation=false;
+        isEnteringContact=false;
+        isEnteringEmail = false;
+        isEnteringFirstName = false;
+        isEnteringLastName = true;
+        speak("Please say  LastName.");
+      }
+    }
+
+    function greet() {
+      if (!isEnteringFirstName && !isEnteringLastName) {
+        speak("Welcome to a new page. Here you have to fill your Guardian details. press 1 to enter first name");
+      }
+    }
+
+    function processSpeech(transcript) {
+      if (isEnteringFirstName) {
+        firstName = transcript;
+        document.getElementById("first_name").value = firstName;
+        speak("FirstName set to " + firstName +"Now press 2 for last name");
+      } else if (isEnteringLastName) {
+        lastName = transcript;
+        document.getElementById("last_name").value = lastName;
+        speak("lastName set to " + lastName +"Now press 3 for email id");
+      } 
+      else if (isEnteringEmail) {
+        email = transcript;
+        document.getElementById("email").value = email;
+        speak("username set to " + email +"Now press 4 for contact");
+      }
+      else if (isEnteringContact) {
+        contact = transcript;
+        document.getElementById("phone").value = contact;
+        speak("Contact Number set to " + contact +"Now press 5 for Occupation.");
+      }
+      else if (isEnteringOccupation) {
+        occupation = transcript;
+        document.getElementById("occupation").value = occupation;
+        speak("occupation set to " + occupation +"Click enter to submit.");
+      }
+      else if (transcript.toLowerCase() === "submit") {
+        submitForm();
+      }
+    }
+
+    function submitForm() {
+      // Redirect to "google.com"
+      window.location.href = "LoginForm.html";
+    }
+
+    function speak(text) {
+      var synth = window.speechSynthesis;
+      var utterance = new SpeechSynthesisUtterance(text);
+      synth.speak(utterance);
+    }
+  </script>
+</body>
+</html> 

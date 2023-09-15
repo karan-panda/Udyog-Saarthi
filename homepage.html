@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Document</title>
+  <script>
+    $(document).ready(function () {
+      $("#myCarousel").carousel();
+    });
+  </script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Raleway", sans-serif;
+}
+
+/* external css: flickity.css */
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 80px;
+  background-color: #fffdfd;
+  position: fixed;
+  top: 0;
+  padding: 1.25rem;
+  z-index: 1;
+
+}
+
+.navbar .nav-menu {
+  display: flex;
+
+}
+
+.nav-menu .nav-item a {
+  display: inline-block;
+  padding: 1rem 1.4rem 1rem 1rem;
+  width: 100%;
+  transition: background 0.3s ease;
+  font-weight: 500;
+  color: #101010;
+
+}
+
+.nav-menu .nav-item a:hover {
+  color: rgb(43, 0, 255);
+
+}
+
+.hamburger {
+  display: none;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+
+  transition: all 0.3s ease-in-out;
+  background-color: #101010;
+}
+
+@media(max-width: 768px) {
+  .nav-menu {
+    position: fixed;
+
+    right: -100%;
+    top: 1.5rem;
+    flex-direction: column;
+
+    width: 50%;
+
+    height: 100%;
+    text-align: right;
+    transition: 0.3s;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+
+    background-color: #f4f4f4;
+  }
+
+  .nav-menu.active {
+    right: 0;
+    height: 100%;
+
+  }
+
+  .nav-menu li:first-child {
+    margin-top: 4.5rem;
+    border-top: 1px solid #fefefe;
+  }
+
+  .nav-item {
+    width: 100%;
+
+    border-bottom: 1px solid #ccc;
+  }
+
+  .hamburger {
+    display: block;
+    cursor: pointer;
+
+  }
+
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
+
+
+.gallery {
+  background: #EEE;
+}
+
+.gallery-cell {
+  width: 66%;
+  height: 200px;
+  margin-right: 10px;
+  background: #8C8;
+  counter-increment: gallery-cell;
+}
+
+/* cell number */
+.gallery-cell:before {
+  display: block;
+  text-align: center;
+  content: counter(gallery-cell);
+  line-height: 200px;
+  font-size: 80px;
+  color: white;
+}
+
+.carousel-item {
+  min-height: 280px;
+}
+
+/* Styles for the title WHATS NEW box */
+.whatsnew-title-box {
+  background-color: red;
+  text-align: center;
+  padding: 10px;
+}
+
+.whatsnew-title {
+  color: white;
+}
+
+/* Styles for the WHATS NEW NOTIFICATIONS */
+.whatsnew-box {
+  background-color: rgb(143, 228, 245);
+  padding: 10px;
+}
+
+.whatsnew-box ul {
+  list-style-type: disc;
+  /* Add bullet points */
+  margin-left: 20px;
+  padding-left: 0;
+}
+
+.whatsnew-box li {
+  color: rgb(143, 228, 245);
+}
+
+snew {
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Add shadow effect */
+}
+
+/* What's New box */
+.whatsnew-box {
+  padding: 0;
+}
+
+.whatsnew-title-box {
+  background-color: red;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 10px;
+}
+
+.whatsnew-title {
+  color: white;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.whatsnew-box ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  padding-left: 0;
+  background-color: rgb(143, 228, 245);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 10px;
+}
+
+.whatsnew-box li {
+  color: rgb(2, 33, 40);
+}
+
+
+
+/* About Us container styles */
+.about-us {
+  background-color: #8cf5b4;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Heading styles */
+.about-us h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Paragraph styles */
+.about-us p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* List styles */
+.about-us ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+/* List item styles */
+.about-us ul li {
+  font-weight: bold;
+}
+
+/* Nested paragraph styles within list items */
+.about-us ul li p {
+  font-weight: normal;
+}
+
+/* Vision and Mission section styles */
+.about-us ul li p {
+  margin-bottom: 0;
+}
+
+/* Add space between list items */
+.about-us ul li:not(:last-child) {
+  margin-bottom: 10px;
+}
+.navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 80px;
+  background-color: #fffdfd;
+  position: fixed;
+  top: 0;
+  padding: 1.25rem;
+  z-index: 1;
+
+}
+
+.navbar .nav-menu {
+  display: flex;
+
+}
+
+.nav-menu .nav-item a {
+  display: inline-block;
+  padding: 1rem 1.4rem 1rem 1rem;
+  width: 100%;
+  transition: background 0.3s ease;
+  font-weight: 500;
+  color: #101010;
+
+}
+
+.nav-menu .nav-item a:hover {
+  color: rgb(43, 0, 255);
+
+}
+
+.hamburger {
+  display: none;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+
+  transition: all 0.3s ease-in-out;
+  background-color: #101010;
+}
+
+@media(max-width: 768px) {
+  .nav-menu {
+    position: fixed;
+
+    right: -100%;
+    top: 1.5rem;
+    flex-direction: column;
+
+    width: 50%;
+
+    height: 100%;
+    text-align: right;
+    transition: 0.3s;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+
+    background-color: #f4f4f4;
+  }
+
+  .nav-menu.active {
+    right: 0;
+    height: 100%;
+
+  }
+
+  .nav-menu li:first-child {
+    margin-top: 4.5rem;
+    border-top: 1px solid #fefefe;
+  }
+
+  .nav-item {
+    width: 100%;
+
+    border-bottom: 1px solid #ccc;
+  }
+
+  .hamburger {
+    display: block;
+    cursor: pointer;
+
+  }
+
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
+  </style>
+</head>
+
+<body>
+  <!-- Header section start-->
+  <!-- <header class="hero">
+    <nav class="navbar">
+      <div class="logo">
+        <a href="#"><img
+            src="https://github-production-user-asset-6210df.s3.amazonaws.com/108183567/267661631-064e7525-66d6-4956-aeaa-10ad5112c2a3.png"
+            alt="Logo" height="92px" style="border-radius: 50%; padding-top:10px;  "></a>
+      </div>
+      <div>
+
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="#" class="nav-link"><Employers href="job.html">jobs</Employers></li>
+          <li class="nav-item"><a href="#" class="nav-link">Resources</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </nav>
+  </header> -->
+  <header class="hero">
+    <nav class="navbar">
+      <div class="logo">
+        <a href="#"><img
+            src="https://github-production-user-asset-6210df.s3.amazonaws.com/108183567/267661631-064e7525-66d6-4956-aeaa-10ad5112c2a3.png"
+            alt="Logo" height="92px" style="border-radius: 50%; padding-top:10px;  "></a>
+      </div>
+      <div>
+
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="job.html" class="nav-link">Jobs</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Resources</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <br>
+
+  <hr>
+
+
+  <!-- Header section End-->
+  <br>
+  <div class="container-lg my-3">
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+      <!-- Carousel indicators -->
+      <ol class="carousel-indicators">
+        <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+        <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+        <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+      </ol>
+
+      <!-- Wrapper for carousel items -->
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="images/carouselpg1.jpg" class="d-block w-100" alt="Slide 1">
+        </div>
+        <div class="carousel-item">
+          <img src="images/carouselpg1.jpg" class="d-block w-100" alt="Slide 2">
+        </div>
+        <div class="carousel-item">
+          <img src="images/carouselpg1.jpg" class="d-block w-100" alt="Slide 3">
+        </div>
+      </div>
+
+      <!-- Carousel controls -->
+      <a class="carousel-control-prev" href="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" href="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+    </div>
+  </div>
+
+  <section class="main-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 whatsnew">
+          <div class="whatsnew-box">
+            <div class="whatsnew-title-box">
+              <h2 class="whatsnew-title">What's New</h2>
+            </div>
+            <ul>
+              <li>Provisionally selected candidates for Admission to M.Phil Clinical Psychology for the year 2023-24
+              </li>
+              <li>Third Round of Counseling Candidates Provisionally Selected for Admission to B.ASLP Programme for the
+                Academic Year 2023-2024</li>
+              <li>Third Round of Counseling Candidates Provisionally Selected for Admission to B.ASLP Programme for the
+                Academic Year 2023-2024</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="about-us">
+            <h2>About Us</h2>
+            <p>The Ministry of Social Justice & Empowerment, Department of Empowerment of Persons with Disabilities,
+              Govt. of India is working and aiming for the empowerment of persons with disabilities since its
+              commencement. This ministry is serving the disabled through its seven delivery models. These are
+              conducting awareness, sensitization and HRD programs, undertaking research & development,
+              providing
+              assistive devices and livelihood for persons with disabilities (PwD) in the year 1980 which
+              reinforces the idea of serving disabled. The United Nation declared decade for disabilities
+              (1982-1992), which led to the advent of the most of the National Institutions. These Institutes
+              started earlier, were working for the persons with Disabilities of different individual
+              categories
+              (single disabilities). The decade between 1993-2002 was declared as the Asia pacific decade of
+              the
+              disabled persons. Further extended as extension of Asia Pacific decade for the disabled
+              2003-2013.
+            </p>
+            <p>This decade led to the emergence & proposal of the PwD (1995) Act and the National Trust (1999)
+              Act
+              in India. After the proposal of National Trust Act (1999), focus was given to Persons with
+              Multiple
+              Disabilities and there arose a need to start a National Institute exclusively for Empowerment of
+              persons with Multiple Disabilities. To achieve the focus given above, National Institute for
+              Empowerment of Persons with Multiple Disabilities (NIEPMD) came in to an existence in the year
+              2005.
+              The Institute is situated in a beautiful ambience on East coast road (ECR) Muttukadu, Chennai,
+              which
+              is 35 kilometers away from the Chennai Central station. Since the commencement in 2005 the
+              services
+              for Persons with Disabilities for single as well as Multiple disabilities as NIEPMD has been
+              given
+              on an outpatient basis through a multi-disciplinary team model, besides the cottage services and
+              extension services.</p><br>
+            <ul>
+              <li>
+                VISION
+                <p>
+                  The persons with Multiple Disabilities have equal rights to lead a better quality of
+                  life. This may be enabled with committed professionalism, accessible environment,
+                  equal opportunities, positive attitudes and appropriate, affordable, acceptable and
+                  available technological interventions.
+                </p>
+              </li>
+              <li>
+                MISSION
+                <p>
+                  To provide need based comprehensive rehabilitation through team approach
+                  facilitating inclusion, ensuring empowerment of persons with Multiple Disabilities
+                  and their families and by substantiating field based research and development of
+                  human resources.
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>

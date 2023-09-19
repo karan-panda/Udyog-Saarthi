@@ -22,7 +22,7 @@ The primary objectives of our Platform are as follows:
 5. **Support with Model Question Papers and Mock Tests:** To prepare PwDs for job interviews and assessments, we offer model question papers and mock tests relevant to various job profiles.
 
 ## Team Members:
-1. Shaivi Puranik
+1. Shaivi Puranik (Leader)
 2. Karan Panda
 3. Anand Pandey
 4. Nishant Pandey

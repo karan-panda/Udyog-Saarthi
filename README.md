@@ -6,6 +6,9 @@ Udyog Saarthi Platform is a progressive web app aimed at empowering persons with
 ## Architecture of our Project
 ![app-architecture](https://github.com/karan-panda/Udyog-Saarthi/assets/108183567/10b64d23-0865-41fc-b0e6-f6e91691ec87)
 
+## Prototype
+https://www.figma.com/proto/zdkt09f0l9Y6WEhJVb3d1U/SIH-Udyog-Saarthi-App-Prototype?type=design&node-id=14-139&t=9S1bucXzCIB1np32-1&scaling=scale-down&page-id=0%3A1&starting-point-node-id=14%3A139&show-proto-sidebar=1
+
 ## Objectives
 The primary objectives of our Platform are as follows:
 
